@@ -1,28 +1,26 @@
 <script setup>
-  import MainButton from './components/MainButton.vue';
-  const greeting = 'Vue + Vite + Composition API';
-  const idBlog = 'blogPosts';
-  const blogClass = 'text-2xl font-bold text-blue-500';
-  const submitButton = {
-    title: 'Submit Button',
-    disabled: true,
+  import { reactive, ref, computed } from 'vue';
+
+  const author = reactive({
+    name: 'John Doe',
+    books: ['Harry Potter', 'The Lord of the Rings', 'The Hobbit'],
+  });
+
+  const isPublished = computed(() => {
+    console.log('test');
+    return author.books.length > 0 ? 'Published Yes' : 'Published No';
+  });
+
+  const count = ref(0);
+
+  const increment = () => {
+    count.value++;
   };
 </script>
 
 <template>
-  <MainButton disabled />
-  <MainButton :title="`button`" />
-  <MainButton :title="`test`" />
-  <MainButton :title="`disabled`" :disabled="true" />
-  <MainButton v-bind="submitButton" />
-  <h1>Vue + Vite</h1>
-
-  <div :id="idBlog" :class="blogClass">
-    {{ greeting }}
-  </div>
-
-  <OptionsComponent />
-  <CompositionComponent />
+  {{ isPublished }}
+  <button @click="increment">{{ count }}</button>
 </template>
 
 <style scoped></style>
