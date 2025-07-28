@@ -1,9 +1,11 @@
 <script setup>
   import { reactive, ref, computed } from 'vue';
 
+  const BookAuthor = ref(true);
+
   const author = reactive({
-    name: 'John Doe',
-    books: ['Harry Potter', 'The Lord of the Rings', 'The Hobbit'],
+    name: 'James Gun',
+    books: ['The Alchemist', 'The Alchemist 2', 'The Alchemist 3'],
   });
 
   const isPublished = computed(() => {
@@ -21,6 +23,13 @@
 <template>
   {{ isPublished }}
   <button @click="increment">{{ count }}</button>
+
+  <h1>
+    {{ author.name }}
+    <span v-if="author.books.length === 1">Published a book</span>
+    <span v-else-if="author.books.length > 1">Published many books</span>
+    <span v-else>Published No books</span>
+  </h1>
 </template>
 
 <style scoped></style>
